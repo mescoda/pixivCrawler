@@ -17,7 +17,8 @@ def download(mode,page):
 	rank = soup.findAll('div','rank')
 
 	for i in range(0,a_num):
-		ranknum = rank[i].find('h1').find('a').find('span').previousSibling
+		ranknum = rank[i].find('h1').find('a')['href']
+		ranknum = ranknum.replace('#','')
 		ranknum = '%03d'%( int(ranknum) )
 		each_a = a[i]
 		imgurl = each_a.find('img')['data-src']
