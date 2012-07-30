@@ -17,6 +17,7 @@ def download(mode,page):
 	rank = soup.findAll('div','rank')
 
 	for i in range(0,a_num):
+		# ranknum = rank[i].find('h1').find('a').find('span').previousSibling
 		ranknum = rank[i].find('h1').find('a')['href']
 		ranknum = ranknum.replace('#','')
 		ranknum = '%03d'%( int(ranknum) )
@@ -48,21 +49,22 @@ def download(mode,page):
 		status = os.system(wget)
 
 		if status == 1:
-			url_new = 'http://www.pixiv.net/member_illust.php?mode=manga&illust_id='+imgid
-			page_new = urllib2.urlopen(url_new)
-			soup_new = BeautifulSoup(page_new)
-			imgs_new = soup_new.findAll('div','image-container')
-			img_num = len(imgs_new)
+			# url_new = 'http://www.pixiv.net/member_illust.php?mode=manga&illust_id='+imgid
+			# page_new = urllib2.urlopen(url_new)
+			# soup_new = BeautifulSoup(page_new)
+			# imgs_new = soup_new.findAll('div','image-container')
+			# img_num = len(imgs_new)
 
-			for i in range(0,img_num):
-				imgid_new = imgid+'_p'+str(i)
-				imgurl_new = imgurl.replace(imgid,imgid_new)
-				wget = 'wget '+imgurl_new+' -O '+folder_root+'\\'+mode+'\\'+folder_time+'/'+ranknum+'-'+artistid+'-'+imgid_new+'-'+imghost+'.'+imgtype+' --referer=http://www.pixiv.net/'
-				os.system(wget)
+			# for i in range(0,img_num):
+			# 	imgid_new = imgid+'_p'+str(i)
+			# 	imgurl_new = imgurl.replace(imgid,imgid_new)
+			# 	wget = 'wget '+imgurl_new+' -O '+folder_root+'\\'+mode+'\\'+folder_time+'/'+ranknum+'-'+artistid+'-'+imgid_new+'-'+imghost+'.'+imgtype+' --referer=http://www.pixiv.net/'
+			# 	os.system(wget)
 			# os.remove(folder_root+'\\'+mode+'\\'+folder_time+'/'+ranknum+'-'+artistid+'-'+imgid+'-'+imghost+'.'+imgtype)
 			os.remove(folder_root+'\\'+mode+'\\'+folder_time+'/'+ranknum+'-'+imgid+'.'+imgtype)
+			
 
 for i in range(1,3):
 	download('monthly',str(i))
-	download('weekly',str(i))
-	download('daily',str(i))
+	# download('weekly',str(i))
+	# download('daily',str(i))
